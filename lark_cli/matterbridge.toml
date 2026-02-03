@@ -1,0 +1,25 @@
+# Matterbridge 飞书机器人测试配置
+
+[api.local]
+BindAddress="127.0.0.1:4242"
+Token="mytoken"
+Buffer=1000
+
+[[gateway]]
+name="lark_gateway"
+enable=true
+    [[gateway.inout]]
+    account="api.local"
+    channel="lark_test" # 这里的 channel 会被 lark_cli 映射或忽略（取决于具体逻辑）
+
+# 使用说明：
+# 
+# 1. 启动 Matterbridge:
+#    matterbridge -conf lark_cli/matterbridge.toml
+#
+# 2. 启动 Lark Client:
+#    cd lark_cli
+#    ./lark_cli -app-id="your-id" -app-secret="your-secret" -verify-token="your-token"
+#
+# 3. 发送消息测试:
+#    在飞书群聊中给机器人发消息，或者使用 test_local.sh 模拟 Matterbridge 消息

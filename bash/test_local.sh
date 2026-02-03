@@ -19,6 +19,7 @@ send_message() {
         -d "{
             \"text\": \"$text\",
             \"username\": \"$username\",
+            \"userid\": \"uid001\",
             \"gateway\": \"$GATEWAY\"
         }" \
         -s | jq '.' 2>/dev/null || echo "消息已发送"
