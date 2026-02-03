@@ -1,0 +1,46 @@
+# Matterbridge 本地测试配置
+# 使用 API Bridge 进行本地测试，无需外部服务
+
+[api.local]
+BindAddress="127.0.0.1:4242"
+Token="mytoken"
+Buffer=1000
+
+[api.local2]
+BindAddress="127.0.0.1:4243"
+Token="mytoken"
+Buffer=1000
+
+[[gateway]]
+name="mygateway"
+enable=true
+    [[gateway.inout]]
+    account="api.local"
+    channel="api"
+
+    [[gateway.inout]]
+    account="api.local2"
+    channel="api"
+
+# 本地测试说明：
+# 
+# 配置说明：
+# - api.local (4242): 用于 test_local.sh 发送测试消息
+# - api.local2 (4243): 用于 cursor_cli 接收消息
+# 两个 API 在同一个 gateway 中，消息会自动转发
+#
+# 使用步骤：
+# 1. 启动 Matterbridge: 
+#    ./matterbridge -conf cursor_cli/matterbridge.toml
+#
+# 2. 启动 Cursor CLI (使用 4243 端口):
+#    cd cursor_cli
+#    ./cursor_cli -api-url="http://127.0.0.1:4243" -token="mytoken" -gateway="mygateway"
+#
+# 3. 使用 test_local.sh 发送测试消息 (使用 4242 端口):
+#    cd bash
+#    ./test_local.sh send "Hello, world!"
+#    ./test_local.sh get  # 查看响应（如果有的话）
+#
+# 工作流程：
+# test_local.sh (4242) → Matterbridge → cursor_cli (4243) → agent 命令 → 响应 → Matterbridge → test_local.sh (4242)

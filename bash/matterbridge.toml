@@ -1,0 +1,40 @@
+# Matterbridge 配置 - Bash Client 测试
+# 用于 bash client 测试和开发
+
+[api.local]
+BindAddress="127.0.0.1:4242"
+Token="mytoken"
+Buffer=1000
+
+[[gateway]]
+name="mygateway"
+enable=true
+    [[gateway.inout]]
+    account="api.local"
+    channel="api"
+
+# 使用说明：
+# 
+# 1. 启动 Matterbridge:
+#    matterbridge -conf bash/matterbridge.toml
+#
+# 2. 使用 test_local.sh 发送消息:
+#    cd bash
+#    ./test_local.sh send "Hello, world!" "Test User"
+#
+# 3. 获取消息:
+#    ./test_local.sh get
+#
+# 4. 健康检查:
+#    ./test_local.sh health
+#
+# 环境变量配置（可选）:
+#    export API_URL="http://127.0.0.1:4242"
+#    export TOKEN="mytoken"
+#    export GATEWAY="mygateway"
+#
+# 注意：
+# - 默认端口: 4242
+# - 默认 Token: mytoken
+# - 默认 Gateway: mygateway
+# - 如需连接其他协议（如 Telegram、Slack），请添加相应的配置段

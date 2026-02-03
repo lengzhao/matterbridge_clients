@@ -1,0 +1,21 @@
+# Agent Client 配置示例
+# 可以通过环境变量或命令行参数覆盖这些配置
+
+# Matterbridge API 配置
+# API_URL=http://127.0.0.1:4242
+# API_TOKEN=mytoken
+
+# Gateway 配置
+# GATEWAY=mygateway
+# BOT_USERNAME=AI Agent
+
+# Agent 配置
+# AGENT_CMD=agent
+# AGENT_ARGS=--print,--output-format,text
+
+# 运行模式
+# MODE=websocket  # 或 polling
+# POLLING_INTERVAL=2s
+
+# 日志
+# DEBUG=false
